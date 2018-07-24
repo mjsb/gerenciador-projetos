@@ -1,1 +1,4 @@
 /vendor/
+/kit-php-do-zero/
+/.vscode/
+bash.exe.stackdump
