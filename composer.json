@@ -1,0 +1,23 @@
+{
+    "name": "mjsb/gerenciador",
+    "description": "Gerenciador de Projetos",
+    "authors": [
+        {
+            "name": "Marcio Borges",
+            "email": "marciojsb@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "gerenciador\\": "src",
+            "App\\": "app"
+        }
+    },
+    "scripts": {
+        "server": "php -S localhost:8080 -t public"
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}
