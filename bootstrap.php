@@ -4,13 +4,8 @@ require __DIR__.'/vendor/autoload.php';
 
 $router = new gerenciador\Router;
 
-$router->add('GET', '/', function(){
-    return 'Homepage';
-});
-
-$router->add('GET', '/projects/(\d+)', function($params){
-    return 'Listando projeto id: ' . $params[1];
-});
+require __DIR__ . '/config/containers.php';
+require __DIR__ . '/config/routes.php';
 
 try {
     echo $router->run();

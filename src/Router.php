@@ -23,7 +23,7 @@ class Router{
 
         if(empty($this->routes[$method])){
             #throw new HttpException('Página não encotrada!', 404);
-            throw new HttpException("Error Processing Request", 404);
+            throw new HttpException("Página não encotrada!", 404);
             
         }
 
@@ -33,7 +33,7 @@ class Router{
             }
         }            
         
-        throw new HttpException("Error Processing Request", 404);
+        throw new HttpException("Página não encotrada!", 404);
 
     }
 
