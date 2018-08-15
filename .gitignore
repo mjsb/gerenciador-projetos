@@ -2,3 +2,4 @@
 /kit-php-do-zero/
 /.vscode/
 bash.exe.stackdump
+phpcs.xml

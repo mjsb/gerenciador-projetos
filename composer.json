@@ -8,18 +8,26 @@
         }
     ],
     "require": {
-        "pimple/pimple": "^3.2"
+        "pimple/pimple": "^3.2",
+        "illuminate/support": "^5.6",
+        "symfony/http-foundation": "^4.1",
+        "zendframework/zend-eventmanager": "^3.2"
     },
     "autoload": {
         "psr-4": {
-            "gerenciador\\": "src",
-            "App\\": "app"
-        }
+            "Gerenciador\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "scripts": {
-        "server": "php -S localhost:8080 -t public"
+        "server": "php -S localhost:8000 -t public"
     },
     "config": {
         "process-timeout": 0
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.3"
     }
 }
