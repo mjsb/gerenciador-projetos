@@ -15,9 +15,9 @@
         </v-flex>
 
         <v-flex xs3>
-            <projects-create/>
+            <projects-create></projects-create>
         </v-flex>
-    </v-layout>        
+    </v-layout>
 </template>
 
 <script>

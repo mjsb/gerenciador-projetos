@@ -13,7 +13,7 @@
                     </v-list-tile-content>
                 </v-list-tile>
 
-                <v-list-tile @click="">
+                <v-list-tile to="/schedules">
                     <v-list-tile-action>
                         <v-icon>schedule</v-icon>
                     </v-list-tile-action>
@@ -31,7 +31,7 @@
             <v-toolbar-title>Gerenciador de Projetos</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-                <v-btn flat>
+                <v-btn @click="logout()" flat>
                     <v-icon>exit_to_app</v-icon>
                     Sair
                 </v-btn>
@@ -45,6 +45,11 @@ export default {
     data() {
         return {
             drawer: true
+        }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('auth/logout');
         }
     }
 }

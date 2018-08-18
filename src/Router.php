@@ -9,7 +9,7 @@ class Router
 
     private $routes = [];
 
-    public function add(string $method, string $pattern, $callback)
+    public function add(STRING $method, string $pattern, $callback)
     {
         $method = strtolower($method);
         $pattern = '/^' . str_replace('/', '\/', $pattern) . '$/';
@@ -17,13 +17,13 @@ class Router
     }
 
     public function run()
-    {
+    { 
 
         $url = $this->getCurrentUrl();
         $method = strtolower($_SERVER['REQUEST_METHOD']);
 
         if (empty($this->routes[$method])) {
-            throw new HttpException("Página não encotrada!", 404);
+            throw new HttpException('Página não encotrada!', 404);
         }
 
         foreach ($this->routes[$method] as $route => $action) {
@@ -32,7 +32,7 @@ class Router
             }
         }
         
-        throw new HttpException("Página não encotrada!", 404);
+        throw new HttpException('Página não encotrada!', 404);
     }
 
     public function getCurrentUrl()

@@ -20,14 +20,14 @@ class Response
         );
 
         $params['params'] = $request; 
-        #var_dump($action);
+
         if (is_string($action)) {
             $action = explode('::', $action);
             $action[0] = new $action[0];
         }
         
         $response = call_user_func_array($action, $params);
-        #var_dump($response);
+        
         if (is_array($response)) {
             $response = json_encode($response);
         }

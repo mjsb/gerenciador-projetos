@@ -1,6 +1,6 @@
 <template>
     <v-list three-line subheader>
-        <v-subheader>Tarefas - {{ section }}</v-subheader>
+        <v-subheader>Tarefas</v-subheader>
         <v-divider></v-divider>
 
         <div v-for="task in tasks" :key="task.id">
@@ -18,14 +18,18 @@
 
 <script>
 import { eventHub } from '../../eventHub';
+import _ from 'underscore';
 
 export default {
     props: [
         'section'
     ],
-    computed: {
+    computed: {        
         tasks() {
-            return this.$store.state.tasks.all; 
+            const tasks = _.filter(this.$store.state.tasks.all, (data) => {
+                return data.section_id == this.section;
+            });
+            return tasks;
         }
     }, 
     methods: {
@@ -34,7 +38,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('tasks/getAll');
+        this.$store.dispatch('tasks/getAll', this.$route.params.id);
     }
 } 
 </script>  

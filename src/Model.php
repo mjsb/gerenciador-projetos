@@ -17,7 +17,7 @@ abstract class Model
         $this->db = $container['db'];
         $this->events = $container['events'];
         $this->queryBuilder = new QueryBuilder;
-
+        
         if (!$this->table) {
             $table = explode('\\', \get_called_class());
             $table = array_pop($table);
@@ -53,6 +53,8 @@ abstract class Model
     {
         $this->events->trigger('creating.'.$this->table , null, $data);
 
+        $data = $this->setData($data);
+
         $query = $this->queryBuilder->insert($this->table, $data)->getData();
 
         $stmt = $this->db->prepare($query->sql);
@@ -68,6 +70,8 @@ abstract class Model
     public function update(array $conditions , array $data)
     {
         $this->events->trigger('updating.'.$this->table , null, $data);
+
+        $data = $this->setData($data);
 
         $query = $this->queryBuilder->update($this->table, $data)
             ->where($conditions)
@@ -98,6 +102,21 @@ abstract class Model
 
         $this->events->trigger('deleted.'.$this->table , null, $result);
 
-        return $result;
+        return $result; 
+    }
+
+    protected function setData($data)
+    {
+        foreach ($data as $field => $value) {
+            $method = str_replace('_', '', $field);
+            $method = ucwords($method);
+            $method = str_replace(' ', '', $method);
+            $method = "set{$method}";
+            if (method_exists($this, $method)) {
+                $data[$field] = $this->$method($value);
+            }
+        }
+
+        return $data;
     }
 }

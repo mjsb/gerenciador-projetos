@@ -10,4 +10,10 @@ class TasksController extends CrudController
     {
         return 'tasks_model';
     }
+
+    public function listByProject($c, $request)
+    {
+        $id = $request->query->get('id');
+        return $c['tasks_model']->getByProjectId($id);
+    }
 }

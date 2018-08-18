@@ -1,5 +1,5 @@
 <template>
-    <v-form v-model="valid" ref="form">
+    <v-form v-model="valid" ref="form" @submit.prevent>
         <v-text-field
             v-model="data.title"
             label="Nova tarefa"

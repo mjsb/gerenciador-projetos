@@ -10,32 +10,35 @@
                     v-model="data.title"
                     :rules="validation.title"
                     label="Título"
-                    required>
-                </v-text-field>
+                    required
+                ></v-text-field>
+
                 <div v-show="data.title">
                     <v-text-field
                         v-model="data.description"
                         label="Descrição"
-                        outline>
-                    </v-text-field>
+                        outline
+                    ></v-text-field>
 
                     <v-menu
                         ref="menu"
                         v-model="menu"
                         :close-on-content-click="false"
-                        :return-value.sync="due_date">
-
+                        :return-value.sync="due_date"
+                    >
                         <v-text-field
                             slot="activator"
                             v-model="due_date"
                             label="Data de entrega"
-                            readonly>
-                        </v-text-field>
+                            readonly
+                        ></v-text-field>
                         <v-date-picker
+                            locale="pt-br"
                             v-model="due_date"
                             no-title
-                            scrollable>
-                            <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
+                            scrollable
+                        >
+                            <v-btn flat color="secondary" @click="menu = false">Cancelar</v-btn>
                             <v-btn flat color="primary" @click="$refs.menu.save(due_date)">Ok</v-btn>
                         </v-date-picker>
                     </v-menu>
@@ -45,23 +48,23 @@
                         v-model="menu2"
                         :close-on-content-click="false"
                         :return-value.sync="due_date_time"
-                        >
-
+                    >
                         <v-text-field
                             slot="activator"
                             v-model="due_date_time"
                             label="Hora da entrega"
-                            readonly>
-                        </v-text-field>
+                            readonly
+                        ></v-text-field>
                         <v-time-picker
-                            v-model="due_date_time">
-
-                            <v-btn flat color="primary" @click="menu2 = false">Cancelar</v-btn>
+                            v-model="due_date_time"
+                        >
+                            <v-btn flat color="secondary" @click="menu2 = false">Cancelar</v-btn>
                             <v-btn flat color="primary" @click="$refs.menuTime.save(due_date_time)">Ok</v-btn>
                         </v-time-picker>
                     </v-menu>
                     <v-btn flat @click="submit()">Salvar</v-btn>
                 </div>
+
             </v-form>
         </v-container>
     </v-card>
@@ -75,20 +78,21 @@ export default {
             menu: false,
             menu2: false,
             data: {},
-            due_date: null,            
-            due_date_time: '12:00',            
+            due_date: null,
+            due_date_time: '12:00',
             validation: {
                 title: [
-                    v => !!v || 'Título é obrigatório!'
+                    v => !!v || 'Título é obrigatório'
                 ]
             }
         }
     },
     methods: {
         submit() {
-            this.data.user_id = 1;
             this.data.due_date = this.due_date + ' ' + this.due_date_time + ':00';
-            this.$store.dispatch('projects/create', this.data);
+            this.$store.dispatch('projects/create', this.data).then((res) => {
+                this.$refs.form.reset();
+            }); 
         }
     }
 }
