@@ -20,6 +20,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('projects/getAll');
+        console.log('URL: '+process.env.ROOT_API);
     }    
 }
 </script>
